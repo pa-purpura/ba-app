@@ -19,32 +19,27 @@ class AssignmentProcedure extends Procedure
     public static string $name = 'Assignment';
 
     /**
-     * Execute the procedure.
+     * Given a range of dates returns the oil price trend on those days.
      *
      * @param Request $request
      *
-     * @return array|string|integer
+     * @return json-rpc
      */
+
     public function GetOilPriceTrend(Request $request)
     {
         $response = Http::get('https://datahub.io/core/oil-prices/r/brent-day.json');
-        // dump($response->status());
-        // dump($response->ok());
 
         $items = $response->json();
-
-        $start = "2012-10-10";
-        $end = "2012-11-10";
-
+        $start = $request->input('startDateISO8601');
+        $end = $request->input('endDateISO8601');
         $prices = [];
 
         foreach ($items as $item) {
-            if ($end > $item["Date"] && $item["Date"] > $start) {
+            if ($end >= $item["Date"] && $item["Date"] >= $start) {
                 array_push($prices, $item);
             }
         }
-
-        // $result = json_encode(['prices' => $prices]);
 
         return ['prices' => $prices];
     }
