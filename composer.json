@@ -10,6 +10,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "penance316/laravel-iso8601-validator": "^1.1",
         "sajya/server": "^6.0"
     },
     "require-dev": {

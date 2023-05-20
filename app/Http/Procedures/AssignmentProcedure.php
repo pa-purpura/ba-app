@@ -29,8 +29,8 @@ class AssignmentProcedure extends Procedure
     public function GetOilPriceTrend(Request $request)
     {
         $request->validate([
-            'startDateISO8601' => 'required|before:endDateISO8601',
-            'endDateISO8601' => 'required|after:startDateISO8601',
+            'startDateISO8601' => 'required|before:endDateISO8601|iso_date',
+            'endDateISO8601' => 'required|after:startDateISO8601|iso_dategit st',
         ]);
 
         $response = Http::get('https://datahub.io/core/oil-prices/r/brent-day.json');
