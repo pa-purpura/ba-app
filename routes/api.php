@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Procedures\AssignmentProcedure;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,32 +22,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::rpc('/v1/GetOilPriceTrend', [AssignmentProcedure::class])->name('GetOilPriceTrend.rpc-endpoint');
 
-Route::get('/GetOil', function (Request $request) {
 
-    $response = Http::get('https://datahub.io/core/oil-prices/r/brent-day.json');
-    dump($response->status());
-    // dump($response->ok());
+// Route::get('/GetOil', function (Request $request) {
 
-    $items = $response->json();
+//     $response = Http::get('https://datahub.io/core/oil-prices/r/brent-day.json');
+//     dump($response->status());
+//     // dump($response->ok());
 
-    $start = "2012-10-10";
-    $end = "2012-12-10";
+//     $items = $response->json();
 
-    $prices = [];
+//     $start = "2012-10-10";
+//     $end = "2012-12-10";
 
-    foreach ($items as $item) {        
-        if ($end > $item["Date"] && $item["Date"] > $start) {
-            array_push($prices, $item);            
-        }        
-    }
+//     $prices = [];
 
-    $result = json_encode(['prices' => $prices]);
+//     foreach ($items as $item) {        
+//         if ($end > $item["Date"] && $item["Date"] > $start) {
+//             array_push($prices, $item);            
+//         }        
+//     }
 
-    return response()->json([
-        'id' => 1,
-        'jsonrpc' => '2.0',
-        "result" => $result,
-    ]);
+//     $result = json_encode(['prices' => $prices]);
+
+//     return response()->json([
+//         'id' => 1,
+//         'jsonrpc' => '2.0',
+//         "result" => $result,
+//     ]);
     
-});
+// });
