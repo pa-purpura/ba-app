@@ -35,7 +35,7 @@ class AssignmentProcedure extends Procedure
             'startDateISO8601' => 'required|before:endDateISO8601|iso_date',
             'endDateISO8601' => 'required|after:startDateISO8601|iso_date',
         ]);
-
+        
         try {
             $response = Http::get('https://datahub.io/core/oil-prices/r/brent-day.json');
 
