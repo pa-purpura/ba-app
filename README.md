@@ -63,7 +63,7 @@ curl --location --request POST 'http://127.0.0.1:8000/api/v1/GetOilPriceTrend' \
 
 ## API Reference
 
-#### Get all items
+#### Get price by day of brent oil index, beetwen two dates
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
